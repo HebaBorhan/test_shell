@@ -101,7 +101,7 @@ int execution(char **args, char **argv)
         {
             if (execve(args[0], args, environ) == -1)
 				{
-					perror(args[0]);
+					perror(argv[0]);
                     freemalloc2d(args);
                     exit(1);
 				}
