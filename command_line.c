@@ -41,37 +41,39 @@ return(cmd);
 */
 char **tokenizer(char *cmd)
 {
-    char *cmdcpy = NULL, *token = NULL, *delim = " \t\n";
+    char *cmdcpy = NULL, *token = NULL;
+    const char *delim = " \t\n";
     char **args = NULL;
-    int i = 0;
-    if (!cmd)
+    int i = 1, j =0;
+    cmdcpy = _strdup(cmd);
+    if (cmdcpy == NULL)
     {
         return (NULL);
     }
 
-    cmdcpy = _strdup(cmd);
+    
     token = strtok(cmdcpy, delim);
-    while (token)
+    while (token != NULL)
     {
         i++;
         token = strtok(NULL, delim);
     }
-    freemalloc(cmdcpy);
+    free(cmdcpy);
     args = malloc((i + 1) * sizeof(char *));
-    if (!args)
+    if (args == NULL)
     {
-        free(cmd);
+        free(cmdcpy);
         return (NULL);
     }
     token = strtok(cmd, delim);
-    i = 0; 
-    while (token)
+     
+    while (token != NULL)
     {
-        args[i] = _strdup(token); 
+        args[j] = _strdup(token); 
         token = strtok(NULL, delim);
-        i++;
+        j++;
     }
-    freemalloc(cmd);
+    free(cmd);
     args[i] = NULL;
     
     

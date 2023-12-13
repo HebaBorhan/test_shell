@@ -16,19 +16,13 @@ if (str == NULL)
 {
 return (NULL);
 }
-while (str[counter] != '\0')
-{
-counter++;
-}
+counter = _strlen(str);
 dupstr = malloc(sizeof(char) * (counter + 1));
 if (dupstr == NULL)
 {
 return (NULL);
 }
-for (i = 0; str[i]; i++)
-{
-dupstr[i] = str[i];
-}
+_strncpy(dupstr, str);
 return (dupstr);
 }
 
