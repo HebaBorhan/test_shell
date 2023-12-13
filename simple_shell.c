@@ -18,11 +18,10 @@ int main(int argc, char **argv)
 char *cmd = NULL, **toks = NULL;
 int stat = 0;
 (void)argc;
-(void)argv;
 
 
     while (1) {
-        cmd = interpreter(); /*cmd is allocated and must be freed*/
+        cmd = interpreter(); 
         if (cmd == NULL)
         {
             if (isatty(STDIN_FILENO)) 
