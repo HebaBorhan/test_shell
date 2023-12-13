@@ -58,7 +58,7 @@ char **tokenizer(char *cmd)
     }
     freemalloc(cmdcpy);
     args = malloc((i + 1) * sizeof(char *));
-    if (args == NULL)
+    if (!args)
     {
         free(cmd);
         return (NULL);
