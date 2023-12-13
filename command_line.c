@@ -23,7 +23,7 @@ ssize_t input;
     input = getline(&cmd, &n, stdin);
     if (input == -1)
     {
-        free(cmd);
+        /*free(cmd);*/
         return (NULL);
     }
    /* remove_newline(cmd);*/
