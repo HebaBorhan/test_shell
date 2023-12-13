@@ -90,7 +90,7 @@ int execution(char **args, char **argv)
     int status;
     extern char **environ;
 
-    if (access(*args, X_OK) == 0) 
+    if (access(args, X_OK) == 0) 
     {
          pid = fork();
          if (pid == -1) 
