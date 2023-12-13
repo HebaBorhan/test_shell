@@ -18,8 +18,6 @@ int main(int argc, char **argv)
 char *cmd = NULL, **toks = NULL;
 int stat = 0;
 (void)argc;
-
-
     while (1) {
         cmd = interpreter(); 
         if (cmd == NULL)
@@ -31,9 +29,6 @@ int stat = 0;
         toks = tokenizer(cmd);
         if (toks == NULL)
             continue;
-    
-            
-      
 
         stat = execution(toks, argv);
          /*if (stat == -1)
