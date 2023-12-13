@@ -23,7 +23,7 @@ ssize_t input;
     input = getline(&cmd, &n, stdin);
     if (input == -1)
     {
-        freemalloc(cmd, 0);
+        freemalloc(cmd);
         return (NULL);
     }
     remove_newline(cmd);
@@ -71,8 +71,8 @@ char **tokenizer(char *cmd)
         i++;
     }
     args[i] = NULL;
-    freemalloc(cmd, 0);
-    freemalloc(cmdcpy, 0);
+    freemalloc(cmd);
+    freemalloc(cmdcpy);
     
 
    return (args);
@@ -103,7 +103,7 @@ int execution(char **args, char **argv)
             if (execve(args[0], args, environ) == -1)
 				{
 					perror(argv[0]);
-                    freemalloc(args, 1);
+                    freemalloc2d(args);
                     exit(EXIT_FAILURE);
 				}
             }
@@ -111,7 +111,7 @@ int execution(char **args, char **argv)
         else 
         {            
             wait(&status); 
-            freemalloc(args, 1);
+            freemalloc2d(args);
         }
     
 

@@ -50,15 +50,24 @@ void remove_newline(char *input)
 /**
 * freemalloc - function that free memory allocation
 * @arg: string to be freed
-* @n: value to be checked for condition
 * Return: void
 */
 
-void freemalloc(char **arg, int n)
+void freemalloc(char *arg)
+{
+    free(arg);
+    arg = NULL;
+}
+
+/**
+* freemalloc2d - function that free memory allocation
+* @arg: array to be freed
+* Return: void
+*/
+
+void freemalloc2d(char **arg)
 {
     int i;
-    if (n == 1)
-    {
         if (arg == NULL)
             return;
         for (i = 0; arg[i]; i++)
@@ -68,10 +77,5 @@ void freemalloc(char **arg, int n)
         }
         free(arg);
         arg = NULL;
-    }
-    else
-    {
-        free(arg);
-        arg = NULL;
-    }
 }
+    
