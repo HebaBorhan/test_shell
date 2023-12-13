@@ -55,7 +55,7 @@ if (s[i] == c)
 return (&s[i]);
 }
 }
-return ('\0');
+return ("\0");
 }
 
 /**
@@ -80,14 +80,27 @@ return (0);
 }
 
 /**
-* remove_newline - function that removes new line
-* @input: string to be checked
-* Return: void
+* *_strncat - function that concatenates two strings.
+* @dest: The string to be concatenated.
+* @src: The string to be concatenated
+* @n: number of bytes used from src
+* Return: dest
 */
-void remove_newline(char *input) 
+char *_strncat(char *dest, char *src, int n)
 {
-    char *newline_ptr = _strchr(input, '\n');
-    if (newline_ptr != NULL) {
-        *newline_ptr = '\0';
-    }
+int i, j;
+i = 0;
+while (dest[i] != '\0')
+{
+i++;
+}
+j = 0;
+while (src[j] != '\0' && j < n)
+{
+dest[i] = src[j];
+j++;
+i++;
+}
+dest[i] = '\0';
+return (dest);
 }
