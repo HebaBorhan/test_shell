@@ -87,7 +87,7 @@ char **tokenizer(char *cmd)
 int execution(char **args, char **argv)
 {
     pid_t pid;
-    int status;
+    int status = 0;
 
     /*if (access(args, X_OK) == 0)*/
     
@@ -101,7 +101,7 @@ int execution(char **args, char **argv)
         {
             if (execve(args[0], args, environ) == -1)
 				{
-					perror(argv[0]);
+					perror(args[0]);
                     freemalloc2d(args);
                     exit(1);
 				}
