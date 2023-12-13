@@ -23,10 +23,10 @@ ssize_t input;
     input = getline(&cmd, &n, stdin);
     if (input == -1)
     {
-        freemalloc(cmd);
+        free(cmd);
         return (NULL);
     }
-    remove_newline(cmd);
+   /* remove_newline(cmd);*/
     /*if (_strcmp(cmd, "exit") == 0) 
     {
         exit(1);
@@ -41,28 +41,29 @@ return(cmd);
 */
 char **tokenizer(char *cmd)
 {
-    char *cmdcpy = NULL, *token = NULL, *delim = " \n";
+    char *cmdcpy = NULL, *token = NULL, *delim = " \t\n";
     char **args = NULL;
     int i = 0;
-    if (cmd == NULL)
+    if (!cmd)
     {
         return (NULL);
     }
 
     cmdcpy = _strdup(cmd);
-    token = strtok(cmd, delim);
+    token = strtok(cmdcpy, delim);
     while (token)
     {
         i++;
         token = strtok(NULL, delim);
     }
+    freemalloc(cmdcpy);
     args = malloc((i + 1) * sizeof(char *));
     if (args == NULL)
     {
-        /*freemalloc(args, 0);*/
+        free(cmd);
         return (NULL);
     }
-    token = strtok(cmdcpy, delim);
+    token = strtok(cmd, delim);
     i = 0; 
     while (token)
     {
@@ -70,11 +71,10 @@ char **tokenizer(char *cmd)
         token = strtok(NULL, delim);
         i++;
     }
-    args[i] = NULL;
     freemalloc(cmd);
-    freemalloc(cmdcpy);
+    args[i] = NULL;
     
-
+    
    return (args);
 }
 
@@ -88,29 +88,28 @@ int execution(char **args, char **argv)
 {
     pid_t pid;
     int status;
-    extern char **environ;
 
     /*if (access(args, X_OK) == 0)*/
     
          pid = fork();
-         if (pid == -1) 
+         /*if (pid == -1) 
          {
             perror("fork");
             return(-1);
-         }
+         }*/
         if (pid == 0) 
         {
             if (execve(args[0], args, environ) == -1)
 				{
 					perror(argv[0]);
                     freemalloc2d(args);
-                    exit(EXIT_FAILURE);
+                    exit(1);
 				}
             }
                      
         else 
         {            
-            wait(&status); 
+            waitpid(pid, &status, 0); 
             freemalloc2d(args);
         }
     

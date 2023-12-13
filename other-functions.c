@@ -68,7 +68,7 @@ void freemalloc(char *arg)
 void freemalloc2d(char **arg)
 {
     int i;
-        if (arg == NULL)
+        if (!arg)
             return;
         for (i = 0; arg[i]; i++)
         {
@@ -78,4 +78,3 @@ void freemalloc2d(char **arg)
         free(arg);
         arg = NULL;
 }
-    

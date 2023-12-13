@@ -8,6 +8,8 @@
 #include <sys/wait.h>
 #include <string.h>
 
+extern char **environ;
+
 int _strlen(char *s);
 char *_strncpy(char *dest, const char *src, int n);
 char *_strchr(char *s, char c);
