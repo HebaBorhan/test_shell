@@ -47,11 +47,11 @@ void remove_newline(char *input)
 * Return: void
 */
 
-void freemalloc(char *arg)
+/*void freemalloc(char *arg)
 {
     free(arg);
     arg = NULL;
-}
+}*/
 
 /**
 * freemalloc2d - function that free memory allocation
@@ -61,14 +61,14 @@ void freemalloc(char *arg)
 
 void freemalloc2d(char **arg)
 {
-    int i;
-        if (!arg)
-            return;
-        for (i = 0; arg[i]; i++)
-        {
-            free(arg[i]);
-            arg[i] = NULL;
-        }
-        free(arg);
-        arg = NULL;
+    int i = 0;
+    if (arg == NULL)
+        return;
+    while (arg[i] != NULL) {
+        free(arg[i]);
+        arg[i] = NULL;
+        i++;
+    }
+    free(arg);
+    arg = NULL;
 }

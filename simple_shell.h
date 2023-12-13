@@ -17,11 +17,11 @@ int _strcmp(char *s1, char *s2);
 char *_strncat(char *dest, char *src, int n);
 char *_strdup(char *str);
 void remove_newline(char *input);
-void freemalloc(char *arg);
+/*void freemalloc(char *arg);*/
 void freemalloc2d(char **arg);
 char *interpreter();
 char **tokenizer(char *cmd);
-int execution(char **args, char **argv);
+int execution(char **args, const char **argv);
 
 
 #endif

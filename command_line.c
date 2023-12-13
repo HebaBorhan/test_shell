@@ -74,7 +74,7 @@ char **tokenizer(char *cmd)
         j++;
     }
     free(cmd);
-    args[i] = NULL;
+    args[j] = NULL;
     
     
    return (args);
@@ -86,7 +86,7 @@ char **tokenizer(char *cmd)
  * Return: void
 */
 
-int execution(char **args, char **argv)
+int execution(char **args, const char **argv)
 {
     pid_t pid;
     int status = 0;
