@@ -5,6 +5,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
 
 /**
  * *interpreter - function that reads user input
@@ -74,7 +75,7 @@ char **tokenizer(char *cmd)
     /*free(cmd);*/
     free(cmdcpy);
 
-   return (*args);
+   return (args);
 }
 
 /**
@@ -83,36 +84,36 @@ char **tokenizer(char *cmd)
  * Return: void
 */
 
-int execution(char *cmd)
+int execution(char **args, char **argv)
 {
     pid_t pid;
-    char **args = NULL;
-    if (access(cmd, X_OK) == 0) {
+    int status;
+    extern char **environ;
+
+    if (access(*args, X_OK) == 0) 
+    {
          pid = fork();
          if (pid == -1) 
          {
             perror("fork");
-            exit(EXIT_FAILURE);
-        }
+            return(-1);
+         }
         if (pid == 0) 
         {
-            args = malloc(2 * sizeof(char));
-            if (args == NULL) {
-                perror("malloc");
-                exit(EXIT_FAILURE);
+            if (execve(args[0], args, environ) == -1)
+				{
+					perror(argv[0]);
+                    /*free function*/
+                    exit(EXIT_FAILURE);
+				}
             }
-            args[0] = cmd;
-            args[1] = NULL;
-            execve(cmd, args, NULL);           
-            perror("execve");
-            free(args);
-            exit(EXIT_FAILURE);
-        } else {            
-            wait(NULL); 
+                     
+        else 
+        {            
+            wait(&status); 
+            /*free function*/
         }
-    } 
-    else {
-        write(STDOUT_FILENO, "./shell: Command not found\n", 27);
     }
-}
 
+    return (WEXITSTATUS(status));
+}

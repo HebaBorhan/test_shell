@@ -17,7 +17,7 @@ char *_strdup(char *str);
 void remove_newline(char *input);
 char *interpreter();
 char **tokenizer(char *cmd);
-int execution(char *cmd);
+int execution(char **args, char **argv);
 
 
 #endif

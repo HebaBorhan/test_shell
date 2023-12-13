@@ -32,10 +32,9 @@ int stat = 0;
         if (toks == NULL)
             continue;
 
-        stat = execution(toks);
-        
-           
-        
+        stat = execution(toks, argv);
+         if (stat == -1)
+            continue;
     }
 
     return (0);
