@@ -42,7 +42,7 @@ return(cmd);
 char **tokenizer(char *cmd)
 {
     char *cmdcpy = NULL, *token = NULL;
-    const char *delim = " \t\n";
+    char *delim = " \t\n";
     char **args = NULL;
     int i = 1, j =0;
     cmdcpy = _strdup(cmd);
@@ -94,11 +94,11 @@ int execution(char **args, char **argv)
     /*if (access(args, X_OK) == 0)*/
     
          pid = fork();
-         /*if (pid == -1) 
+         if (pid == -1) 
          {
             perror("fork");
             return(-1);
-         }*/
+         }
         if (pid == 0) 
         {
             if (execve(args[0], args, environ) == -1)

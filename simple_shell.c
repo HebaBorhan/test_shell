@@ -31,6 +31,8 @@ int stat = 0;
         toks = tokenizer(cmd);
         if (toks == NULL)
             continue;
+    
+            
       
 
         stat = execution(toks, argv);
