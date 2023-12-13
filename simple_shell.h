@@ -21,7 +21,7 @@ void remove_newline(char *input);
 void freemalloc2d(char **arg);
 char *interpreter();
 char **tokenizer(char *cmd);
-int execution(char **args, const char **argv);
+int execution(char **args, char **argv);
 
 
 #endif
