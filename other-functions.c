@@ -22,7 +22,7 @@ if (dupstr == NULL)
 {
 return (NULL);
 }
-_strncpy(dupstr, str);
+_strcpy(dupstr, str);
 return (dupstr);
 }
 
