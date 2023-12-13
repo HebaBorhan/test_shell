@@ -23,16 +23,14 @@ ssize_t input;
     input = getline(&cmd, &n, stdin);
     if (input == -1)
     {
-        free(cmd);
+        freemalloc(cmd, 0);
         return (NULL);
     }
     remove_newline(cmd);
-    if (_strcmp(cmd, "exit") == 0) 
+    /*if (_strcmp(cmd, "exit") == 0) 
     {
         exit(1);
-    }
-
-
+    }*/
 return(cmd);
 }
 
@@ -56,24 +54,26 @@ char **tokenizer(char *cmd)
     while (token)
     {
         i++;
-         token = strtok(NULL, delim);
+        token = strtok(NULL, delim);
     }
     args = malloc((i + 1) * sizeof(char *));
     if (args == NULL)
     {
+        /*freemalloc(args, 0);*/
         return (NULL);
     }
     token = strtok(cmdcpy, delim);
     i = 0; 
     while (token)
     {
-        args[i] = token; /*free cpy will delete everything*/
+        args[i] = _strdup(token); 
         token = strtok(NULL, delim);
         i++;
     }
     args[i] = NULL;
-    /*free(cmd);*/
-    free(cmdcpy);
+    freemalloc(cmd, 0);
+    freemalloc(cmdcpy, 0);
+    
 
    return (args);
 }
@@ -90,8 +90,8 @@ int execution(char **args, char **argv)
     int status;
     extern char **environ;
 
-    if (access(args, X_OK) == 0) 
-    {
+    /*if (access(args, X_OK) == 0)*/
+    
          pid = fork();
          if (pid == -1) 
          {
@@ -103,7 +103,7 @@ int execution(char **args, char **argv)
             if (execve(args[0], args, environ) == -1)
 				{
 					perror(argv[0]);
-                    /*free function*/
+                    freemalloc(args, 1);
                     exit(EXIT_FAILURE);
 				}
             }
@@ -111,9 +111,9 @@ int execution(char **args, char **argv)
         else 
         {            
             wait(&status); 
-            /*free function*/
+            freemalloc(args, 1);
         }
-    }
+    
 
     return (WEXITSTATUS(status));
 }

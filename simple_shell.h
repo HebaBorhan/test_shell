@@ -15,6 +15,7 @@ int _strcmp(char *s1, char *s2);
 char *_strncat(char *dest, char *src, int n);
 char *_strdup(char *str);
 void remove_newline(char *input);
+void freemalloc(char **arg, int n);
 char *interpreter();
 char **tokenizer(char *cmd);
 int execution(char **args, char **argv);
