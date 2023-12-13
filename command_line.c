@@ -23,7 +23,7 @@ ssize_t input;
     input = getline(&cmd, &n, stdin);
     if (input == -1)
     {
-        /*free(cmd);*/
+        free(cmd);
         return (NULL);
     }
    /* remove_newline(cmd);*/
@@ -46,7 +46,7 @@ char **tokenizer(char *cmd)
     char **args = NULL;
     int i = 1, j =0;
     cmdcpy = _strdup(cmd);
-    if (cmdcpy == NULL)
+    if (cmd == NULL)
     {
         return (NULL);
     }
